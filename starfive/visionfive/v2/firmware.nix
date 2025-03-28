@@ -28,6 +28,11 @@ in
           type = lib.types.nullOr (lib.types.listOf lib.types.package);
           default = null;
         };
+        extraConfig = lib.mkOption {
+          description = "";
+          type = lib.types.nullOr lib.types.string;
+          default = null;
+        };
       };
     };
   };
@@ -42,6 +47,7 @@ in
       uboot = (pkgs.callPackage ./uboot.nix { inherit (config.system.build) opensbi; }).overrideAttrs (f: p: {
         src = if cfg.uboot.src != null then cfg.uboot.src else p.src;
         patches = if cfg.uboot.patches != null then cfg.uboot.patches else (p.patches or []);
+        extraConfig = if cfg.uboot.extraConfig != null then cfg.uboot.extraConfig else p.extraConfig or "");
       });
 
       updater-flash = pkgs.writeShellApplication {
