@@ -30,7 +30,7 @@ in
         };
         extraConfig = lib.mkOption {
           description = "Extra configuration to pass to the VisionFive2 U-boot source";
-          type = lib.types.nullOr lib.types.string;
+          type = lib.types.nullOr lib.types.str;
           default = null;
         };
       };
